@@ -1,0 +1,122 @@
+@use '../../scss/abstracts/' as *;
+@use 'sass:math';
+
+.sidebar {
+    @include flex(stretch, flex-start);
+    flex-direction: column;
+    color: $txtColor;
+    width: $sideBarWidth;
+    background-color: $mainBg;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+
+    @include tablet {
+        width: 100vw;
+        background-color: $mainColor;
+        color: $white;
+        z-index: 1;
+    }
+
+    &__logo {
+        @include flex();
+        margin: 30px;
+        padding-bottom: 30px;
+
+        img {
+            --size: 55px;
+            width: var(--size);
+            height: var(--size);
+        }
+
+        .sidebar-close {
+            cursor: pointer;
+            display: none;
+
+            i {
+                font-size: 16px;
+            }
+
+            @include tablet {
+                display: block;
+            }
+        }
+    }
+
+    &__menu {
+        @include flex(stretch, flex-start);
+        flex-direction: column;
+        flex-grow: 1;
+
+        &__item {
+            @include flex(center, flex-start);
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 10%;
+            transition: color 0.3s ease-in-out;
+
+            @include tablet {
+                padding-left: $mobileSpacing;
+            }
+
+            &:hover {
+                color: $mainColor;
+
+                @include tablet {
+                    color: $orange;
+                }
+            }
+
+            &.active {
+                font-weight: 700;
+                color: $mainColor;
+
+                @include tablet {
+                    color: $orange;
+                }
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    height: 100%;
+                    width: 5px;
+                    left: 0;
+                    top: 0;
+                    background-color: $mainColor;
+                    border-top-right-radius: 20px;
+                    border-bottom-right-radius: 20px;
+
+                    @include tablet {
+                        background-color: $orange;
+                    }
+                }
+            }
+
+            &__txt {
+                font-size: 16px;
+            }
+
+            &__icon {
+                --size: 10px;
+                width: var(--size);
+                height: var(--size);
+                margin-right: 1rem;
+                @include flex(center, center);
+
+                @include tablet {
+                    margin-right: 1rem;
+                }
+
+                i {
+                    font-size: 16px;
+                }
+            }
+
+            &:last-child {
+                margin-top: auto;
+                cursor: pointer;
+            }
+        }
+    }
+}
